@@ -7,7 +7,7 @@ $ npm install mongsql --save
 
 #### Create Connection
 
-   ```javascript
+```javascript
 const mongsql = require('mongsql');
  var connection = new mongsql({
 	host: "localhost",
@@ -21,10 +21,11 @@ connection.connect().then(result => {
 }).catch(err => {
 	console.log(err);
 });
-   ```
+```
+
 #### Define Model
 
-   ```javascript
+```javascript
 var model = {
 	tableName: "TableName",
 	defination : [{
@@ -42,19 +43,21 @@ var model = {
 		allowNull: false
 	}]
 };
-   ```
-   ####Sync Tables with Database
-   ```javascript
+```
+
+#### Sync Tables with Database
+```javascript
 connection.sync(model).then(result =>{
 	console.log(result);
 }).catch(err => {
 	console.log(err);
 });
    
-   ```
+```
+
 ##### Foreign Key ( Only One)
 	 
- ```javascript
+```javascript
 {
 	tableName: "books",
 	defination : [{
@@ -77,7 +80,7 @@ connection.sync(model).then(result =>{
 		targetTable : "person"
 	}
 }
- ```
+```
 	 
 	 
 #### Quering 
