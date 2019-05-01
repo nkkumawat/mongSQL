@@ -43,6 +43,9 @@ class mongsql {
                     sqlQuery += " , ";          
                 }
             }
+            if(model.belongsToOne) {
+                sqlQuery +=  utils.belongsToOne(model.belongsToOne);
+            }
             sqlQuery += " ) ;"
             this.log("Executing : ---- " +sqlQuery);
             this.connection.query(sqlQuery, function (err, results, fields) {
@@ -96,14 +99,20 @@ class mongsql {
             var sqlQuery = "Select" ;
             var includeString = " * ";
             var whereString = " ";
-            for (var i = 0; i < keys.length; i++) {
-                if(keys[i] == 'where'){
-                    whereString = utils[keys[i]](values[i]);
-                }else if(keys[i] == 'include') {
-                    includeString  = utils[keys[i]](values[i]);
-                }
+            var joinsString = " "
+            if("where" in params){
+                whereString = utils['where'](params.where, tableName);
             }
-            sqlQuery += includeString + " from " + tableName + " " + whereString +" LIMIT 1;";
+            if('include' in params) {
+                includeString  = utils['include'](params.include, tableName);
+            }
+            if('fullJoins' in params) {
+                var fullJoinString = utils['fullJoins'](params.fullJoins);
+                joinsString = " " + fullJoinString.fullJoinSqlQuery;
+                includeString += ", " + fullJoinString.includeSqlQuery;
+            }
+            
+            sqlQuery += includeString + " from " + tableName + " "+ joinsString + " " + whereString +" LIMIT 1;";
             console.log(sqlQuery);
             this.log("Executing ----- " +sqlQuery);
             this.connection.query(sqlQuery, function (err, results, fields) {
@@ -123,14 +132,20 @@ class mongsql {
             var sqlQuery = "Select" ;
             var includeString = " * ";
             var whereString = " ";
-            for (var i = 0; i < keys.length; i++) {
-                if(keys[i] == 'where'){
-                    whereString = utils[keys[i]](values[i]);
-                }else if(keys[i] == 'include') {
-                    includeString  = utils[keys[i]](values[i]);
-                }
+            var joinsString = " "
+            if("where" in params){
+                whereString = utils['where'](params.where, tableName);
             }
-            sqlQuery += includeString + " from " + tableName + " " + whereString +" ;";
+            if('include' in params) {
+                includeString  = utils['include'](params.include, tableName);
+            }
+            if('fullJoins' in params) {
+                var fullJoinString = utils['fullJoins'](params.fullJoins);
+                joinsString = " " + fullJoinString.fullJoinSqlQuery;
+                includeString += ", " + fullJoinString.includeSqlQuery;
+            }
+            
+            sqlQuery += includeString + " from " + tableName + " "+ joinsString + " " + whereString +";";
             console.log(sqlQuery);
             this.log("Executing ----- " +sqlQuery);
             this.connection.query(sqlQuery, function (err, results, fields) {
