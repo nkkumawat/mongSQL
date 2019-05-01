@@ -1,4 +1,3 @@
-[TOC]
 #### Install
 
 ```sh
@@ -11,45 +10,45 @@ $ npm install mongsql --save
    ```javascript
 const mongsql = require('mongsql');
  var connection = new mongsql({
-		host: "localhost",
-		username: "username",
-		password: "password",
-		database: "databaseName"
+	host: "localhost",
+	username: "username",
+	password: "password",
+	database: "databaseName"
 });
 
 connection.connect().then(result => {
-		console.log(result);
+	console.log(result);
 }).catch(err => {
-		console.log(err);
+	console.log(err);
 });
    ```
 ####Define Model
 
    ```javascript
 var model = {
-		tableName: "TableName",
-		defination : [{
-				id : "INT",
-				autoIncrement: true,
-				primaryKey: true
-		},{
-				username: "VARCHAR(100)",
-				unique: true
-		},{
-				email : "VARCHAR(100)",
-				allowNull : true
-		},{
-				password: "VARCHAR(100)",
-				allowNull: false
-		}]
+	tableName: "TableName",
+	defination : [{
+		id : "INT",
+		autoIncrement: true,
+		primaryKey: true
+	},{
+		username: "VARCHAR(100)",
+		unique: true
+	},{
+		email : "VARCHAR(100)",
+		allowNull : true
+	},{
+		password: "VARCHAR(100)",
+		allowNull: false
+	}]
 };
    ```
    ####Sync Tables with Database
    ```javascript
  connection.sync(model).then(result =>{
-		console.log(result);
+	console.log(result);
 }).catch(err => {
-		console.log(err);
+	console.log(err);
 });
    
    ```
@@ -61,16 +60,16 @@ var model = {
 
 ```javascript
 var params = {
-		username: "nkkumawat",
-		email: "nk0kumawat@gmail.com",
-		password : "password"
+	username: "nkkumawat",
+	email: "nk0kumawat@gmail.com",
+	password : "password"
 };
 var tableName = "TableName";
 
 connection.insert(tableName , params).then(result => {
-		console.log(result);
+	console.log(result);
 }).catch(err => {
-		console.log(err);
+	console.log(err);
 });
 ```
 2. find one result 
@@ -81,16 +80,16 @@ connection.insert(tableName , params).then(result => {
 ```javascript
 var tableName = "TableName";
 var params = {
-		where :{
-				password: "password"
-		},
-		include : ['id' , 'password']
+	where :{
+		password: "password"
+	},
+	include : ['id' , 'password']
 };
 
 connection.findOne(tableName,params).then(result => {
-		console.log(result);
+	console.log(result);
 }).catch(err => {
-		console.log(err);
+	console.log(err);
 })
 
 ```
@@ -102,18 +101,18 @@ connection.findOne(tableName,params).then(result => {
 ```javascript
 var tableName = "TableName";
 var params = {
-		where :{
-				password: "password"
-		},
-		include : ['id' , 'password']
+	where :{
+		password: "password"
+	},
+	include : ['id' , 'password']
 };
 
 connection.findAll(tableName,params).then(result => {
-		console.log(result);
+	console.log(result);
 }).catch(err => {
-		console.log(err);
+	console.log(err);
 })
 
 ```
-###Contribute
+#### Contribute
 still under contruction.........
