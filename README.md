@@ -45,7 +45,7 @@ var model = {
    ```
    ####Sync Tables with Database
    ```javascript
- connection.sync(model).then(result =>{
+connection.sync(model).then(result =>{
 	console.log(result);
 }).catch(err => {
 	console.log(err);
