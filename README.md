@@ -22,7 +22,7 @@ connection.connect().then(result => {
 	console.log(err);
 });
    ```
-####Define Model
+#### Define Model
 
    ```javascript
 var model = {
@@ -52,7 +52,7 @@ var model = {
 });
    
    ```
-####Quering 
+#### Quering 
 1. Insert into table
 ```sh
  insert(tableName , params)
